@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title class='nop'>Top Colors Finder</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</head>
+<body>
+<header class='blok'>
+    <h1 class='nop'>Image Colour Palette Generator</h1>
+    <p class='nop'>
+        Upload an image and this site will tell you all colors along with their hex codes.
+        If two colors appear the same number of times, both will be shown here.
+    </p>
+    
+    
+    <!--a href="/register" >Register</a> | <a href="/login">Login</a-->
+    <!--div class="topnav">
+    <a  href="/register" style="color: white;">Register</a>
+    <a href="/login" style="color: white;">Login</a>
+    </div-->
+
+    <!--a href="/register" >Register</a> | <a href="/login">Login</a-->
+<div class="topnav">
+    <!--a href="/register" id="registerLink" style="color: white;">Register</a-->
+    <a href="/register" id="loginLink" style="color: white;">Sign in</a>
+</div>
+
+
+
+</header>
+<form action="/" method="POST" enctype="multipart/form-data" id="imageForm" onsubmit="return validateForm()">
+    <input type="file" name="file" id="fileInput" required />
+    <br>
+    Select Colour Codes:
+    <label>
+        <input type="checkbox" name="colour_code" value="rgb" onchange="handleCheckboxChange(this)"> RGB
+    </label>
+    <label>
+        <input type="checkbox" name="colour_code" value="hex" onchange="handleCheckboxChange(this)"> Hex
+    </label>
+
+    
+    <br>
+    <input type="submit" />
+    <!-- Hidden input field to store image source -->
+    <input type="hidden" id="imageSrc" name="imageSrc" value="">
+</form>
+<div id="imageContainer">
+    <img id="selectedImage" src="" alt="Selected Image">
+</div>
+<main>
+    {% for i in range(colors_list|length) %}
+        <div class="pair">
+            {% if code != 'hex': %}
+                <div class="color-box" style="background-color: rgb{{ colors_list[i] }};"></div>
+                <div class="color-box-value" > {{ loop.index }}: rgb{{colors_list[i]}}
+                    <button onclick="copyColorCode('rgb{{colors_list[i]}}')">Copy</button>
+                </div>
+            {% else: %}
+                <div class="color-box" style="background-color: #{{ colors_list[i] }};"></div>
+                <div class="color-box-value" id="hex{{i}}"> {{ loop.index }}: #{{colors_list[i]}}
+                    <button onclick="copyColorCode('#{{colors_list[i]}}')">Copy</button>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</main>
+<script>
+    // JavaScript to display the selected image and store its source URL
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        const selectedFile = event.target.files[0];
+        const imageUrl = URL.createObjectURL(selectedFile);
+        document.getElementById('selectedImage').src = imageUrl;
+        // Store the image source in local storage
+        localStorage.setItem('imageSrc', imageUrl);
+    });
+
+    // JavaScript to set the selected image source after form submission
+    window.onload = function() {
+        const imageSrc = localStorage.getItem('imageSrc');
+        if (imageSrc) {
+            document.getElementById('selectedImage').src = imageSrc;
+        }
+    };
+
+    // JavaScript function to validate form before submission
+    function validateForm() {
+        const checkboxes = document.querySelectorAll('input[name="colour_code"]:checked');
+        if (checkboxes.length === 0) {
+            alert("Please select at least one color code option.");
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+
+    // JavaScript function to handle checkbox change
+    function handleCheckboxChange(checkbox) {
+        const checkboxes = document.querySelectorAll('input[name="colour_code"]');
+        checkboxes.forEach(function(currentCheckbox) {
+            if (currentCheckbox !== checkbox) {
+                currentCheckbox.checked = false;
+            }
+        });
+    }
+
+    // JavaScript function to copy color code to clipboard
+    function copyColorCode(colorCode) { 
+        const el = document.createElement('textarea');
+        el.value = colorCode;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        alert('Copied to clipboard: ' + colorCode);
+    }
+</script>
+</html>

@@ -1,0 +1,175 @@
+* { 
+	box-sizing: border-box; 
+	margin: 0%; 
+	padding: 0%; 
+
+
+} 
+
+.blok{
+	background: linear-gradient(to top right, #000066 0%, #003300 100%);
+
+}
+.nop{
+	color: #fff;
+  letter-spacing: 1.5px;
+
+
+}
+header, form, main { 
+	margin: auto; 
+	width: 100%;
+	font-family: "Sofia", sans-serif;
+	padding: 1.1rem 1.2rem; 
+
+} 
+
+header > h1 { 
+	font-size: 2.5rem; 
+	margin-bottom: 20px; 
+} 
+
+header > p { 
+	color: gray; 
+	font-size: 1.2rem; 
+} 
+
+form { 
+	background-image: linear-gradient(220.55deg, #FFF500 0%, #FF00B8 100%);
+} 
+
+input { 
+	margin: 10px 0; 
+} 
+
+input[type='submit'], input[type='file'] { 
+	font-size: 1.2rem; 
+} 
+
+input:hover { 
+	cursor: pointer; 
+} 
+
+input[type='submit'] { 
+	padding: 0.5rem 0.8rem; 
+	border: 2px solid #003333; 
+	background-color: #003333; 
+	color: white; 
+	border-radius: 4px; 
+} 
+
+main { 
+	padding: 0; 
+
+} 
+
+.pair { 
+	width: 100%; 
+	display: flex; 
+	margin: auto; 
+	align-items: center; 
+} 
+
+.pair > .color-box { 
+	width: 50%; 
+	height: 50px; 
+	border: 1px solid black; 
+	text-align: center; 
+	padding: 1.1%; 
+	margin: 0; 
+} 
+
+.pair > .color-box-value { 
+	width: 50%; 
+	height: 50px; 
+	border: 1px solid black; 
+	text-align: center; 
+	padding: 1.1%; 
+	margin: 0; 
+} 
+
+#imageContainer {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+
+#selectedImage {
+    max-width: 100%;
+    height: auto;
+    max-height: 310px; /* Set a fixed height for the image */
+    margin-top: 20px; /* Adjust as needed */
+
+}
+.check {
+  cursor: pointer;
+  position: relative;
+  margin: auto;
+  width: 18px;
+  height: 18px;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0, 0, 0);
+}
+
+.check:before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(34,50,84,0.03);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.check svg {
+  position: relative;
+  z-index: 1;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #c8ccd4;
+  stroke-width: 1.5;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.2s ease;
+}
+
+.check svg path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 0;
+}
+
+.check svg polyline {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 66;
+}
+
+.check:hover:before {
+  opacity: 1;
+}
+
+.check:hover svg {
+  stroke: #4285f4;
+}
+
+#cbx:checked + .check svg {
+  stroke: #4285f4;
+}
+
+#cbx:checked + .check svg path {
+  stroke-dashoffset: 60;
+  transition: all 0.3s linear;
+}
+
+#cbx:checked + .check svg polyline {
+  stroke-dashoffset: 42;
+  transition: all 0.2s linear;
+  transition-delay: 0.15s;
+}
+.topnav{
+  text-align: right;
+  
+
+}
